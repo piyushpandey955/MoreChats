@@ -8,6 +8,7 @@ from backend.ai.profile_architect import (
     score_reddit_profile,
     generate_bio_variants, generate_reddit_comment_suggestions,
 )
+from backend.ai.llm import generate_json, get_active_model, get_active_provider
 from backend.config import settings
 
 router = APIRouter(prefix="/api/settings", tags=["settings"])
@@ -55,24 +56,27 @@ def get_rate_limits():
 
 @router.get("/test-gemini")
 def test_gemini_connection():
-    """Quick test to verify Gemini API key works."""
+    """Quick test to verify configured AI provider connection works."""
     try:
-        from google import genai
-        from google.genai import types
-        client = genai.Client(api_key=settings.gemini_api_key)
-        response = client.models.generate_content(
-            model=settings.gemini_model,
-            contents="Say 'hello' in one word. Return JSON: {\"reply\": \"hello\"}",
-            config=types.GenerateContentConfig(
-                response_mime_type="application/json",
-                temperature=0.0,
-            ),
-        )
         import json
-        data = json.loads(response.text)
-        return {"status": "connected", "model": settings.gemini_model, "response": data}
+        text = generate_json(
+            "Say 'hello' in one word. Return JSON: {\"reply\": \"hello\"}",
+            temperature=0.0,
+        )
+        data = json.loads(text)
+        return {
+            "status": "connected",
+            "provider": get_active_provider(),
+            "model": get_active_model(),
+            "response": data,
+        }
     except Exception as e:
-        return {"status": "error", "model": settings.gemini_model, "error": str(e)}
+        return {
+            "status": "error",
+            "provider": get_active_provider(),
+            "model": get_active_model(),
+            "error": str(e),
+        }
 
 
 @router.get("/config")

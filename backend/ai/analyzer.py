@@ -1,13 +1,11 @@
 """
 AI Analyzer -- Analyzes Reddit posts/users
 to produce category scores, personality traits, and match scores.
-Uses Google Gemini via the google-genai SDK.
+Uses configured LLM provider (Gemini or NVIDIA NIM).
 """
 
 import json
-from google import genai
-from google.genai import types
-from backend.config import settings
+from backend.ai.llm import generate_json
 from backend.models.schemas import Category
 
 
@@ -22,17 +20,8 @@ CATEGORIES_DESCRIPTION = {
 
 
 def _generate(prompt: str, temperature: float = 0.4) -> str:
-    """Generate content using Gemini and return the response text."""
-    client = genai.Client(api_key=settings.gemini_api_key)
-    response = client.models.generate_content(
-        model=settings.gemini_model,
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            temperature=temperature,
-        ),
-    )
-    return response.text
+    """Generate content and return JSON text."""
+    return generate_json(prompt, temperature=temperature)
 
 
 SYSTEM_INSTRUCTION = """You are an AI analyst for a personal CRM system. Your job is to analyze social media profiles/posts and score them against 6 personality archetypes.

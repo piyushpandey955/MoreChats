@@ -27,9 +27,10 @@ class Settings(BaseSettings):
     # Subreddits to monitor
     reddit_monitor_subreddits: str = "r4r,r4rindia,SFWr4rIndia,MakeNewFriendsHere,MeetNewPeopleHere,MeetPeople,Needafriend"
 
-    # --- Google Gemini ---
+    # --- AI ---
     gemini_api_key: str = ""
-    gemini_model: str = "gemini-2.0-flash"
+    nvidia_api_key: str = ""
+    gemini_model: str = "gemma-3n-e4b-it"
 
     # --- Persona ---
     persona_name: str = "Divit"

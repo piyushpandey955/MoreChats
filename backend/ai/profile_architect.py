@@ -5,9 +5,7 @@ AI Profile Architect -- Reddit-focused persona utilities and generators.
 import json
 import logging
 
-from google import genai
-from google.genai import types
-
+from backend.ai.llm import generate_json
 from backend.config import settings
 
 logger = logging.getLogger(__name__)
@@ -89,21 +87,8 @@ REDDIT_READINESS_CHECKLIST = [
 ]
 
 
-def _get_client():
-    return genai.Client(api_key=settings.gemini_api_key)
-
-
 def _generate(prompt: str, temperature: float = 0.8) -> str:
-    client = _get_client()
-    response = client.models.generate_content(
-        model=settings.gemini_model,
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            temperature=temperature,
-        ),
-    )
-    return response.text
+    return generate_json(prompt, temperature=temperature)
 
 
 def score_reddit_profile(profile_data: dict) -> dict:
@@ -178,7 +163,7 @@ def generate_bio_variants(platform: str, context: str = "") -> list[dict]:
                 if isinstance(v, dict)
             ]
     except Exception as exc:
-        logger.error(f"Gemini bio generation failed: {exc}")
+        logger.error(f"AI bio generation failed: {exc}")
 
     return PERSONA["platforms"]["reddit"]["bio_options"]
 
@@ -200,7 +185,7 @@ def generate_reddit_comment_suggestions(subreddit: str, thread_title: str) -> li
         data = json.loads(text)
         return data.get("comments", [])
     except Exception as exc:
-        logger.error(f"Gemini reddit comment generation failed: {exc}")
+        logger.error(f"AI reddit comment generation failed: {exc}")
         return []
 
 

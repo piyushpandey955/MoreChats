@@ -1,27 +1,16 @@
 """
 AI Message Crafter -- Generates personalized Reddit outreach responses
 based on Divit's persona.
-Uses Google Gemini via the google-genai SDK.
+Uses configured LLM provider (Gemini or NVIDIA NIM).
 """
 
 import json
-from google import genai
-from google.genai import types
-from backend.config import settings
+from backend.ai.llm import generate_json
 
 
 def _generate(prompt: str, temperature: float = 0.8) -> str:
-    """Generate content using Gemini and return the response text."""
-    client = genai.Client(api_key=settings.gemini_api_key)
-    response = client.models.generate_content(
-        model=settings.gemini_model,
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            temperature=temperature,
-        ),
-    )
-    return response.text
+    """Generate content and return JSON text."""
+    return generate_json(prompt, temperature=temperature)
 
 
 PERSONA_CONTEXT = f"""You are crafting messages on behalf of Divit (I_exist on Reddit).

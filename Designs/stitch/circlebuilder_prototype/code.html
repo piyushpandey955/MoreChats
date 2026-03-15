@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CircleBuilder Prototype</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff4400",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#23140f",
+                        "surface-dark": "#2a1a15",
+                        "border-dark": "#3d2821",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 68, 0, 0.2); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 68, 0, 0.4); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .active-tab { font-variation-settings: 'FILL' 1; }
+        .circular-progress {
+            background: conic-gradient(var(--primary-color) 270deg, #3a2c27 0deg);
+            --primary-color: #ff4400;
+        }
+    </style>
+
+    <!-- React & Router -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/history@5/umd/history.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-router@6.3.0/umd/react-router.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { createRoot } = ReactDOM;
+        const { MemoryRouter, Routes, Route, Link, useNavigate, useLocation } = ReactRouterDOM;
+
+        // --- Shared Components ---
+
+        const DesktopSidebar = () => {
+            const location = useLocation();
+            
+            const NavLink = ({ to, icon, label, exact = false }) => {
+                const isActive = exact ? location.pathname === to : location.pathname.startsWith(to);
+                return (
+                    <Link to={to} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${isActive ? 'bg-primary/10 text-primary border border-primary/20' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5'}`}>
+                        <span className="material-symbols-outlined">{icon}</span>
+                        <span className="font-medium text-sm">{label}</span>
+                    </Link>
+                );
+            };
+
+            return (
+                <aside className="w-64 flex flex-col border-r border-slate-200 dark:border-primary/20 bg-background-light dark:bg-background-dark hidden lg:flex">
+                    <div className="p-6 flex items-center gap-3">
+                        <div className="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                            <span className="material-symbols-outlined">circle_notifications</span>
+                        </div>
+                        <div>
+                            <h1 className="text-lg font-bold leading-none">CircleBuilder</h1>
+                            <p className="text-xs text-slate-500 dark:text-primary/60 font-medium">Lead Gen Suite</p>
+                        </div>
+                    </div>
+                    <nav className="flex-1 px-4 space-y-1 mt-2">
+                        <NavLink to="/" icon="explore" label="Discovery" exact={true} />
+                        <NavLink to="/pipeline" icon="view_kanban" label="Pipeline" />
+                        <NavLink to="/analytics" icon="leaderboard" label="Analytics" />
+                        <NavLink to="/profile-setup" icon="person_add" label="Profile Setup" />
+                        <NavLink to="/settings" icon="settings" label="Settings" />
+                    </nav>
+                    <div className="mt-auto p-4 border-t border-slate-200 dark:border-primary/10">
+                        <div className="flex items-center gap-3 px-2">
+                            <div className="size-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+                                <span className="material-symbols-outlined text-primary">person</span>
+                            </div>
+                            <div className="flex-1 min-w-0">
+                                <p className="text-sm font-semibold truncate">Alex Growth</p>
+                                <p className="text-xs text-slate-500 dark:text-primary/60 truncate">Pro Plan</p>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            );
+        };
+
+        const MobileBottomNav = () => {
+            const location = useLocation();
+            
+            const NavItem = ({ to, icon, label, exact = false }) => {
+                const isActive = exact ? location.pathname === to : location.pathname.startsWith(to);
+                return (
+                    <Link to={to} className={`flex flex-col items-center gap-1 group ${isActive ? 'text-primary' : 'text-slate-400 dark:text-slate-500'}`}>
+                        <div className={`p-1 rounded-full flex items-center justify-center transition-all group-active:scale-95 ${isActive ? 'bg-primary/10' : ''}`}>
+                            <span className={`material-symbols-outlined ${isActive ? 'active-tab' : ''}`}>{icon}</span>
+                        </div>
+                        <span className={`text-[10px] ${isActive ? 'font-bold' : 'font-medium'}`}>{label}</span>
+                    </Link>
+                );
+            };
+
+            return (
+                <nav className="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-background-dark/95 backdrop-blur-lg border-t border-slate-200 dark:border-primary/20 px-2 pb-6 pt-2 lg:hidden z-50">
+                    <div className="flex justify-around items-center max-w-md mx-auto">
+                        <NavItem to="/" icon="explore" label="Discovery" exact={true} />
+                        <NavItem to="/pipeline" icon="view_kanban" label="Pipeline" />
+                        <NavItem to="/analytics" icon="monitoring" label="Analytics" />
+                        <NavItem to="/profile-setup" icon="person" label="Profile" />
+                        <NavItem to="/settings" icon="settings" label="Settings" />
+                    </div>
+                </nav>
+            );
+        };
+
+        // --- Screens ---
+
+        const Dashboard = () => {
+            const navigate = useNavigate();
+            return (
+                <div className="flex h-screen overflow-hidden">
+                    <DesktopSidebar />
+                    <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
+                        <header className="h-16 border-b border-slate-200 dark:border-primary/20 bg-white/50 dark:bg-background-dark/50 backdrop-blur-md flex items-center justify-between px-4 lg:px-8">
+                            <div className="flex-1 max-w-md hidden md:block">
+                                <div className="relative">
+                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-primary/40 text-lg">search</span>
+                                    <input className="w-full bg-slate-100 dark:bg-primary/5 border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 text-slate-900 dark:text-slate-100" placeholder="Search leads, subreddits, or keywords..." type="text"/>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-3 ml-auto">
+                                <button className="bg-primary hover:bg-primary/90 text-white px-4 lg:px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all shadow-lg shadow-primary/20">
+                                    <span className="material-symbols-outlined text-lg">radar</span>
+                                    <span className="hidden sm:inline">Run Reddit Scan</span>
+                                    <span className="sm:hidden">Scan</span>
+                                </button>
+                                <div className="h-8 w-px bg-slate-200 dark:bg-primary/20 mx-2 hidden lg:block"></div>
+                                <button className="size-10 rounded-xl flex items-center justify-center hover:bg-slate-100 dark:hover:bg-primary/10 relative text-slate-600 dark:text-slate-300">
+                                    <span className="material-symbols-outlined">notifications</span>
+                                    <span className="absolute top-2 right-2 size-2 bg-primary rounded-full border-2 border-white dark:border-background-dark"></span>
+                                </button>
+                            </div>
+                        </header>
+                        <div className="flex-1 overflow-y-auto p-4 lg:p-8 space-y-6 pb-24 lg:pb-8">
+                            
+                            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+                                <div className="bg-white dark:bg-primary/5 p-4 lg:p-6 rounded-xl border border-slate-200 dark:border-primary/10 shadow-sm col-span-2 lg:col-span-1">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Total Leads</p>
+                                        <span className="text-green-500 text-xs font-bold flex items-center gap-1">
+                                            <span className="material-symbols-outlined text-xs">trending_up</span>+12%
+                                        </span>
+                                    </div>
+                                    <h3 className="text-3xl font-bold">1,240</h3>
+                                </div>
+                                <div className="bg-white dark:bg-primary/5 p-4 lg:p-6 rounded-xl border border-slate-200 dark:border-primary/10 shadow-sm">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Reply Rate</p>
+                                    </div>
+                                    <h3 className="text-2xl lg:text-3xl font-bold">18.5%</h3>
+                                </div>
+                                <div className="bg-white dark:bg-primary/5 p-4 lg:p-6 rounded-xl border border-slate-200 dark:border-primary/10 shadow-sm">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <p className="text-sm font-medium text-slate-500 dark:text-slate-400">New</p>
+                                    </div>
+                                    <h3 className="text-2xl lg:text-3xl font-bold">142</h3>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col gap-4">
+                                <div className="flex items-center justify-between flex-wrap gap-4">
+                                    <h2 className="text-lg font-bold">Discovery Feed</h2>
+                                    <div className="bg-slate-200 dark:bg-primary/10 p-1 rounded-xl flex items-center border border-transparent dark:border-primary/20">
+                                        <button className="px-3 py-1.5 rounded-lg text-xs font-bold bg-white dark:bg-background-dark shadow-sm">Newest</button>
+                                        <button className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400">Match</button>
+                                    </div>
+                                </div>
+
+                                <div className="grid gap-4">
+                                    {/* Lead Card 1 */}
+                                    <div className="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/20 rounded-xl p-4 space-y-3 cursor-pointer hover:border-primary/50 transition-colors" onClick={() => navigate('/lead/pixel_architect')}>
+                                        <div className="flex justify-between items-start">
+                                            <div className="flex items-center gap-3">
+                                                <div className="size-10 rounded-full bg-slate-200 dark:bg-primary/20 flex items-center justify-center font-bold text-primary text-sm">u/</div>
+                                                <div>
+                                                    <p className="font-bold leading-tight">pixel_architect</p>
+                                                    <p className="text-xs text-slate-500">r/SaaS • 2h ago</p>
+                                                </div>
+                                            </div>
+                                            <div className="bg-green-500/10 text-green-500 px-2 py-1 rounded text-[10px] font-bold uppercase border border-green-500/20">
+                                                98% Match
+                                            </div>
+                                        </div>
+                                        <p className="text-sm text-slate-700 dark:text-slate-300 line-clamp-2">
+                                            "Looking for a way to automate our Reddit outreach. Any tools that help identify leads without being spammy?"
+                                        </p>
+                                        <div className="flex items-center gap-2">
+                                            <span className="bg-slate-100 dark:bg-primary/20 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full">Design Tools</span>
+                                        </div>
+                                    </div>
+
+                                    {/* Lead Card 2 */}
+                                    <div className="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/20 rounded-xl p-4 space-y-3 cursor-pointer hover:border-primary/50 transition-colors" onClick={() => navigate('/lead/indie_coder_99')}>
+                                        <div className="flex justify-between items-start">
+                                            <div className="flex items-center gap-3">
+                                                <div className="size-10 rounded-full bg-slate-200 dark:bg-primary/20 flex items-center justify-center font-bold text-primary text-sm">u/</div>
+                                                <div>
+                                                    <p className="font-bold leading-tight">indie_coder_99</p>
+                                                    <p className="text-xs text-slate-500">r/SideProject • 5h ago</p>
+                                                </div>
+                                            </div>
+                                            <div className="bg-yellow-500/10 text-yellow-600 px-2 py-1 rounded text-[10px] font-bold uppercase border border-yellow-500/20">
+                                                84% Match
+                                            </div>
+                                        </div>
+                                        <p className="text-sm text-slate-700 dark:text-slate-300 line-clamp-2">
+                                            "Has anyone tried building a Lead Gen tool? Currently using manual search and it's taking forever."
+                                        </p>
+                                        <div className="flex items-center gap-2">
+                                            <span className="bg-slate-100 dark:bg-primary/20 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full">Developer Tools</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <MobileBottomNav />
+                </div>
+            );
+        };
+
+        const LeadDetail = () => {
+            const navigate = useNavigate();
+            return (
+                <div className="flex h-screen overflow-hidden">
+                    <DesktopSidebar />
+                    <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
+                        <header className="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-primary/20 px-4 lg:px-8 py-4">
+                            <div className="flex items-center gap-4">
+                                <button onClick={() => navigate(-1)} className="lg:hidden p-2 -ml-2 hover:bg-primary/10 rounded-full">
+                                    <span className="material-symbols-outlined text-primary">arrow_back</span>
+                                </button>
+                                <div className="flex items-center gap-3">
+                                    <h2 className="text-xl lg:text-2xl font-bold">u/pixel_architect</h2>
+                                    <span className="hidden sm:inline-block px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/20 text-primary border border-primary/30">Discovered</span>
+                                </div>
+                                <div className="ml-auto flex items-center gap-2">
+                                    <button className="hidden sm:block px-4 py-2 text-sm font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Archive</button>
+                                    <button className="px-4 py-2 text-sm font-semibold rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">Compose</button>
+                                </div>
+                            </div>
+                        </header>
+                        
+                        <div className="flex-1 overflow-y-auto p-4 lg:p-8 space-y-6 pb-24 lg:pb-8">
+                            <section className="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-4 lg:p-6">
+                                <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <span className="material-symbols-outlined text-primary">account_circle</span>
+                                    Reddit Profile Snapshot
+                                </h3>
+                                <div className="grid grid-cols-3 gap-3 mb-4">
+                                    <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 text-center">
+                                        <p className="text-[10px] lg:text-xs text-slate-500 uppercase tracking-wider mb-1">Karma</p>
+                                        <p className="text-lg lg:text-xl font-bold text-primary">12k</p>
+                                    </div>
+                                    <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 text-center">
+                                        <p className="text-[10px] lg:text-xs text-slate-500 uppercase tracking-wider mb-1">Age</p>
+                                        <p className="text-lg lg:text-xl font-bold text-primary">4y</p>
+                                    </div>
+                                    <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 text-center">
+                                        <p className="text-[10px] lg:text-xs text-slate-500 uppercase tracking-wider mb-1">Active In</p>
+                                        <p className="text-sm font-bold truncate">r/SaaS</p>
+                                    </div>
+                                </div>
+                                <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-4 border-l-4 border-primary/50">
+                                    <p className="text-xs text-slate-500 mb-2 font-medium">Original Post Excerpt:</p>
+                                    <p className="text-sm italic text-slate-700 dark:text-slate-300 leading-relaxed">
+                                        "Looking for a way to automate our Reddit outreach. Any tools that help identify leads without being spammy?"
+                                    </p>
+                                </div>
+                            </section>
+
+                            <section className="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-4 lg:p-6">
+                                <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <span className="material-symbols-outlined text-primary">psychology</span>
+                                    AI Insights
+                                </h3>
+                                <div className="space-y-4">
+                                    <div>
+                                        <div className="flex justify-between text-xs mb-1">
+                                            <span className="font-medium">Technical Depth</span>
+                                            <span className="text-primary">95%</span>
+                                        </div>
+                                        <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full">
+                                            <div className="h-full bg-primary rounded-full" style={{width: '95%'}}></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="flex justify-between text-xs mb-1">
+                                            <span className="font-medium">Purchasing Intent</span>
+                                            <span className="text-primary">82%</span>
+                                        </div>
+                                        <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full">
+                                            <div className="h-full bg-primary rounded-full" style={{width: '82%'}}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            
+                            <section className="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-4 lg:p-6 shadow-xl shadow-black/5">
+                                <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                                    <span className="material-symbols-outlined text-primary">smart_toy</span>
+                                    AI Message Composer
+                                </h3>
+                                <div className="relative">
+                                    <textarea className="w-full h-32 p-4 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg focus:ring-primary focus:border-primary transition-all resize-none" defaultValue={`Hi u/pixel_architect, saw your post in r/SaaS about automating outreach.\n\nWe built a tool specifically for this that focuses on high-intent identification rather than mass spam. Would you be open to seeing a quick demo?`}></textarea>
+                                </div>
+                                <button className="w-full mt-4 py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/30">
+                                    <span className="material-symbols-outlined">auto_awesome</span> Approve + Send
+                                </button>
+                            </section>
+                        </div>
+                    </main>
+                    <MobileBottomNav />
+                </div>
+            );
+        };
+
+        const Pipeline = () => {
+            return (
+                <div className="flex h-screen overflow-hidden">
+                    <DesktopSidebar />
+                    <main className="flex-1 flex flex-col min-w-0">
+                        <header className="h-16 border-b border-slate-200 dark:border-primary/20 flex items-center justify-between px-4 lg:px-8 bg-background-light dark:bg-background-dark/50 backdrop-blur-md z-10">
+                            <h2 className="text-xl font-bold tracking-tight">Pipeline</h2>
+                        </header>
+                        
+                        <div className="sticky top-0 z-40 bg-background-light dark:bg-background-dark border-b border-primary/5 overflow-x-auto no-scrollbar lg:hidden">
+                            <div className="flex px-4 gap-6 min-w-max">
+                                <button className="relative py-3 text-sm font-bold text-primary border-b-2 border-primary">
+                                    Discovered <span className="ml-1 text-[10px] bg-primary/20 px-1.5 py-0.5 rounded-full">2</span>
+                                </button>
+                                <button className="py-3 text-sm font-medium text-slate-500">
+                                    Analyzed <span className="ml-1 text-[10px] bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded-full">1</span>
+                                </button>
+                                <button className="py-3 text-sm font-medium text-slate-500">
+                                    Engaging <span className="ml-1 text-[10px] bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded-full">1</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="flex-1 overflow-x-auto custom-scrollbar bg-slate-50 dark:bg-background-dark p-4 lg:p-6 pb-24 lg:pb-6">
+                            <div className="flex gap-4 h-full min-w-max">
+                                {/* Column: Discovered */}
+                                <div className="w-72 flex flex-col gap-4">
+                                    <div className="flex items-center justify-between px-2 hidden lg:flex">
+                                        <div className="flex items-center gap-2">
+                                            <span className="size-2 rounded-full bg-blue-400"></span>
+                                            <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500">Discovered</h3>
+                                            <span className="bg-slate-200 dark:bg-primary/20 px-2 py-0.5 rounded text-[10px] font-bold">2</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex-1 space-y-3 overflow-y-auto custom-scrollbar pr-1">
+                                        <div className="bg-white dark:bg-primary/5 p-4 rounded-xl border border-slate-200 dark:border-primary/10 shadow-sm">
+                                            <div className="flex items-start justify-between mb-2">
+                                                <div>
+                                                    <p className="text-sm font-bold text-primary">u/pixel_architect</p>
+                                                    <span className="text-[10px] font-bold text-slate-400 uppercase">r/SaaS</span>
+                                                </div>
+                                                <div className="bg-green-500/10 text-green-500 px-1.5 py-0.5 rounded text-[10px] font-black">98</div>
+                                            </div>
+                                        </div>
+                                        <div className="bg-white dark:bg-primary/5 p-4 rounded-xl border border-slate-200 dark:border-primary/10 shadow-sm">
+                                            <div className="flex items-start justify-between mb-2">
+                                                <div>
+                                                    <p className="text-sm font-bold text-primary">u/indie_coder_99</p>
+                                                    <span className="text-[10px] font-bold text-slate-400 uppercase">r/SideProject</span>
+                                                </div>
+                                                <div className="bg-yellow-500/10 text-yellow-600 px-1.5 py-0.5 rounded text-[10px] font-black">84</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Column: Analyzed */}
+                                <div className="w-72 flex flex-col gap-4 hidden md:flex">
+                                    <div className="flex items-center justify-between px-2">
+                                        <div className="flex items-center gap-2">
+                                            <span className="size-2 rounded-full bg-purple-400"></span>
+                                            <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500">Analyzed</h3>
+                                            <span className="bg-slate-200 dark:bg-primary/20 px-2 py-0.5 rounded text-[10px] font-bold">1</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex-1 space-y-3 overflow-y-auto custom-scrollbar pr-1">
+                                        <div className="bg-white dark:bg-primary/5 p-4 rounded-xl border border-slate-200 dark:border-primary/10 shadow-sm">
+                                            <div className="flex items-start justify-between mb-2">
+                                                <div>
+                                                    <p className="text-sm font-bold text-primary">u/mike_build</p>
+                                                    <span className="text-[10px] font-bold text-slate-400 uppercase">Engineer</span>
+                                                </div>
+                                                <div className="bg-yellow-500/10 text-yellow-500 px-1.5 py-0.5 rounded text-[10px] font-black">85</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Column: Engaging */}
+                                <div className="w-72 flex flex-col gap-4 hidden lg:flex">
+                                    <div className="flex items-center justify-between px-2">
+                                        <div className="flex items-center gap-2">
+                                            <span className="size-2 rounded-full bg-primary"></span>
+                                            <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500">Engaging</h3>
+                                            <span className="bg-primary/20 text-primary px-2 py-0.5 rounded text-[10px] font-bold">1</span>
+                                        </div>
+                                    </div>
+                                    <div className="flex-1 space-y-3 overflow-y-auto custom-scrollbar pr-1">
+                                        <div className="bg-white dark:bg-primary/5 p-4 rounded-xl border border-slate-200 dark:border-primary/10 border-l-4 border-l-primary shadow-sm">
+                                            <div className="flex items-start justify-between mb-2">
+                                                <div>
+                                                    <p className="text-sm font-bold text-primary">u/elena_design</p>
+                                                    <span className="text-[10px] font-bold text-slate-400 uppercase">Product</span>
+                                                </div>
+                                                <div className="bg-yellow-500/10 text-yellow-500 px-1.5 py-0.5 rounded text-[10px] font-black">78</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <MobileBottomNav />
+                </div>
+            );
+        };
+
+        const Analytics = () => {
+            return (
+                <div className="flex h-screen overflow-hidden">
+                    <DesktopSidebar />
+                    <main className="flex-1 overflow-y-auto bg-background-dark p-4 lg:p-8 pb-24 lg:pb-8">
+                        <header className="mb-6 lg:mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div>
+                                <h2 className="text-2xl lg:text-3xl font-black text-slate-100 tracking-tight">Analytics</h2>
+                                <p className="text-slate-400 text-sm mt-1">Real-time performance metrics</p>
+                            </div>
+                            <div className="flex bg-surface-dark p-1 rounded-xl border border-border-dark w-full md:w-auto">
+                                <button className="flex-1 md:flex-none px-4 py-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors">7d</button>
+                                <button className="flex-1 md:flex-none px-4 py-1.5 text-xs font-semibold text-white bg-primary rounded-lg shadow-lg shadow-primary/20">30d</button>
+                                <button className="flex-1 md:flex-none px-4 py-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors">90d</button>
+                            </div>
+                        </header>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 mb-8">
+                            <div className="bg-surface-dark border border-border-dark p-4 lg:p-6 rounded-xl">
+                                <p className="text-slate-400 text-sm font-medium mb-2">Total Leads</p>
+                                <div className="flex items-baseline gap-2">
+                                    <p className="text-2xl lg:text-3xl font-bold text-slate-100">1,284</p>
+                                    <p className="text-emerald-500 text-sm font-semibold">+12.4%</p>
+                                </div>
+                                <div className="mt-4 h-1 w-full bg-border-dark rounded-full overflow-hidden">
+                                    <div className="h-full bg-primary w-2/3"></div>
+                                </div>
+                            </div>
+                            <div className="bg-surface-dark border border-border-dark p-4 lg:p-6 rounded-xl">
+                                <p className="text-slate-400 text-sm font-medium mb-2">Reply Rate</p>
+                                <div className="flex items-baseline gap-2">
+                                    <p className="text-2xl lg:text-3xl font-bold text-slate-100">24.5%</p>
+                                    <p className="text-emerald-500 text-sm font-semibold">+2.1%</p>
+                                </div>
+                                <div className="mt-4 h-1 w-full bg-border-dark rounded-full overflow-hidden">
+                                    <div className="h-full bg-primary w-1/4"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                            <div className="bg-surface-dark border border-border-dark p-4 lg:p-6 rounded-xl">
+                                <h3 className="text-slate-100 font-bold mb-4">Status Funnel</h3>
+                                <div className="space-y-4">
+                                    <div>
+                                        <div className="flex justify-between text-xs mb-1">
+                                            <span className="text-slate-400">Discovered</span>
+                                            <span className="text-slate-100">4,120</span>
+                                        </div>
+                                        <div className="h-4 bg-primary/20 rounded relative"><div className="absolute inset-0 bg-primary w-full rounded"></div></div>
+                                    </div>
+                                    <div>
+                                        <div className="flex justify-between text-xs mb-1">
+                                            <span className="text-slate-400">Contacted</span>
+                                            <span className="text-slate-100">2,840</span>
+                                        </div>
+                                        <div className="h-4 bg-primary/20 rounded relative"><div className="absolute inset-0 bg-primary w-[68%] rounded"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <MobileBottomNav />
+                </div>
+            );
+        };
+
+        const ProfileSetup = () => {
+            return (
+                <div className="flex h-screen overflow-hidden">
+                    <DesktopSidebar />
+                    <main className="flex-1 overflow-y-auto p-4 lg:p-8 max-w-5xl mx-auto w-full pb-24 lg:pb-8">
+                        <header className="mb-6 lg:mb-10 text-center lg:text-left">
+                            <h2 className="text-2xl lg:text-3xl font-black tracking-tight mb-2">Profile Setup</h2>
+                            <p className="text-slate-500 dark:text-slate-400 text-sm lg:text-base">Fine-tune your Reddit persona for maximum engagement.</p>
+                        </header>
+                        
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                            <div className="lg:col-span-2 space-y-6">
+                                <section className="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 rounded-xl p-4 lg:p-6">
+                                    <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-primary">psychology</span>
+                                        Persona Summary
+                                    </h3>
+                                    <h4 className="text-primary font-bold mb-2">The Thoughtful Solopreneur</h4>
+                                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                        Your persona focuses on providing high-value advice to early-stage founders while subtly sharing your journey.
+                                    </p>
+                                </section>
+
+                                <section className="space-y-4">
+                                    <h3 className="text-lg font-bold flex items-center gap-2">
+                                        <span className="material-symbols-outlined text-primary">auto_awesome</span>
+                                        Bio Option Generator
+                                    </h3>
+                                    <div className="p-4 bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 rounded-xl">
+                                        <p className="text-sm italic text-slate-600 dark:text-slate-300 mb-4">"Building in public 🚀 | Helping solopreneurs scale from 0 to 1. Founder of @CircleBuilder."</p>
+                                        <button className="w-full lg:w-auto px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg">Use this</button>
+                                    </div>
+                                </section>
+                            </div>
+
+                            <div className="space-y-6">
+                                <section className="p-6 bg-white dark:bg-primary/10 border border-slate-200 dark:border-primary/20 rounded-xl text-center">
+                                    <h3 className="text-lg font-bold mb-4">Readiness</h3>
+                                    <div className="text-4xl font-black text-primary mb-4">75%</div>
+                                    <ul className="text-left space-y-2">
+                                        <li className="flex items-center gap-2 text-sm"><span className="material-symbols-outlined text-primary text-base">check_circle</span> Persona</li>
+                                        <li className="flex items-center gap-2 text-sm"><span className="material-symbols-outlined text-primary text-base">check_circle</span> Bio</li>
+                                    </ul>
+                                </section>
+                                <button className="w-full py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/30">
+                                    Finalize Profile
+                                </button>
+                            </div>
+                        </div>
+                    </main>
+                    <MobileBottomNav />
+                </div>
+            );
+        };
+
+        const Settings = () => {
+            return (
+                <div className="flex h-screen overflow-hidden">
+                    <DesktopSidebar />
+                    <main className="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark/50">
+                        <div className="max-w-4xl mx-auto p-4 lg:p-8 pb-24 lg:pb-8">
+                            <header className="mb-6 lg:mb-10">
+                                <h2 className="text-2xl lg:text-3xl font-black tracking-tight mb-2">Settings</h2>
+                            </header>
+
+                            <div className="space-y-8">
+                                <section>
+                                    <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><span className="material-symbols-outlined text-primary">person_edit</span> Account Config</h3>
+                                    <div className="space-y-4">
+                                        <label className="block text-sm font-semibold">Reddit Handle</label>
+                                        <div className="relative">
+                                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium">u/</span>
+                                            <input className="w-full pl-8 bg-white dark:bg-background-dark border border-slate-200 dark:border-primary/20 rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary outline-none" placeholder="username" type="text" defaultValue="pixel_architect"/>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section>
+                                    <h3 className="text-xl font-bold mb-4 flex items-center gap-2"><span className="material-symbols-outlined text-primary">speed</span> Rate Limits</h3>
+                                    <div className="bg-primary/5 border border-primary/10 rounded-2xl p-4 lg:p-6">
+                                        <div className="flex justify-between items-center mb-4">
+                                            <label className="text-sm font-semibold">Max DMs/day</label>
+                                            <span className="bg-primary px-3 py-1 rounded-full text-white text-xs font-bold">42</span>
+                                        </div>
+                                        <input className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" max="50" min="0" type="range" defaultValue="42"/>
+                                    </div>
+                                </section>
+
+                                <div className="pt-6 border-t border-slate-200 dark:border-primary/10 flex justify-end gap-4">
+                                    <button className="px-6 py-2.5 rounded-xl font-bold text-sm text-white bg-primary shadow-lg shadow-primary/20 w-full lg:w-auto">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    <MobileBottomNav />
+                </div>
+            );
+        };
+
+        const App = () => {
+            return (
+                <MemoryRouter>
+                    <Routes>
+                        <Route path="/" element={<Dashboard />} />
+                        <Route path="/lead/:id" element={<LeadDetail />} />
+                        <Route path="/pipeline" element={<Pipeline />} />
+                        <Route path="/analytics" element={<Analytics />} />
+                        <Route path="/profile-setup" element={<ProfileSetup />} />
+                        <Route path="/settings" element={<Settings />} />
+                    </Routes>
+                </MemoryRouter>
+            );
+        };
+
+        const root = createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lead Details - CircleBuilder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff4400",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#23140f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center p-4 justify-between max-w-md mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">arrow_back</span>
+<h2 class="text-lg font-bold leading-tight tracking-tight">Lead Details</h2>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">share</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">more_vert</span>
+</div>
+</div>
+</header>
+<main class="max-w-md mx-auto">
+<!-- Profile Header Section -->
+<section class="flex flex-col items-center p-6 gap-4">
+<div class="relative">
+<div class="size-28 rounded-full border-4 border-primary/20 p-1">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Professional portrait of a male tech enthusiast" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJM9aap83qiAHFkVPWiys0gSvMUkGu2xpS-32UmQLyS1QdfuVBG9O0BBhT3zJbsmQSFc1NikXXv3p5h_YB4pKiuHlNi6DAQvS_JVoKHeXzPQUUJF7nZu5oTOubS03FRs2_hx-ENne64pbaHAl_dvRNsxpiHQhqR66LKenzAKlTPXWstu6GKQ_b2ecjxxkSTf_kNoJtxZY-ElFoT5cU0jsmKJ4dvKvyKYnU6OFs9x--j-qaHiVRw27pvMdMnU8t_II6TcSfzYeFAvap')"></div>
+</div>
+<div class="absolute bottom-1 right-1 bg-green-500 size-5 rounded-full border-4 border-background-dark"></div>
+</div>
+<div class="text-center">
+<h1 class="text-2xl font-bold">@alex_growth_hacker</h1>
+<div class="flex items-center justify-center gap-2 mt-1">
+<span class="px-2 py-0.5 rounded bg-green-500/10 text-green-500 text-xs font-bold uppercase tracking-wider">Active</span>
+<span class="text-slate-400 text-sm">•</span>
+<span class="text-primary font-bold">98% Match Score</span>
+</div>
+<p class="text-slate-400 text-sm mt-2 font-medium">CircleBuilder Platinum Lead</p>
+</div>
+</section>
+<!-- Stats Grid -->
+<section class="grid grid-cols-3 gap-3 px-4">
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/10 rounded-xl p-4 flex flex-col items-center">
+<span class="text-slate-400 text-xs font-medium uppercase mb-1">Karma</span>
+<span class="text-xl font-bold text-primary">12.4k</span>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/10 rounded-xl p-4 flex flex-col items-center">
+<span class="text-slate-400 text-xs font-medium uppercase mb-1">Age</span>
+<span class="text-xl font-bold text-primary">2.4y</span>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 border border-primary/10 rounded-xl p-4 flex flex-col items-center">
+<span class="text-slate-400 text-xs font-medium uppercase mb-1">Subs</span>
+<span class="text-xl font-bold text-primary">18</span>
+</div>
+</section>
+<!-- AI Insights Section -->
+<section class="mt-8 px-4">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+<h3 class="text-lg font-bold">AI Insights</h3>
+</div>
+<div class="space-y-5 bg-primary/5 dark:bg-white/5 p-5 rounded-2xl border border-primary/10">
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<p class="text-sm font-semibold">Engagement Velocity</p>
+<p class="text-xs font-bold text-primary">92/100</p>
+</div>
+<div class="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 92%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<p class="text-sm font-semibold">Niche Authority</p>
+<p class="text-xs font-bold text-primary">85/100</p>
+</div>
+<div class="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div class="pt-2">
+<p class="text-xs font-bold uppercase tracking-widest text-primary mb-2">Why this match?</p>
+<p class="text-sm text-slate-400 leading-relaxed">
+                        Strong alignment with your core audience. Frequently discusses <span class="text-slate-100 font-medium">SaaS scaling</span> and <span class="text-slate-100 font-medium">indie hacking</span>. High sentiment score in recent tech-related subreddits.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Message Composer Section -->
+<section class="mt-8 px-4">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">chat_bubble</span>
+<h3 class="text-lg font-bold">Message Draft</h3>
+</div>
+<div class="flex gap-1 bg-slate-200 dark:bg-slate-800 p-1 rounded-lg">
+<button class="px-3 py-1 text-xs font-bold rounded-md bg-primary text-white shadow-sm">A</button>
+<button class="px-3 py-1 text-xs font-bold rounded-md hover:bg-slate-700 transition-colors">B</button>
+<button class="px-3 py-1 text-xs font-bold rounded-md hover:bg-slate-700 transition-colors">C</button>
+</div>
+</div>
+<div class="relative">
+<textarea class="w-full bg-transparent border-2 border-primary/20 focus:border-primary rounded-xl p-4 text-sm leading-relaxed min-h-[160px] focus:ring-0 transition-all placeholder:text-slate-600" placeholder="Enter your message...">Hey @alex_growth_hacker, saw your recent post about SaaS infrastructure. We're building something that specifically solves the bottleneck you mentioned in r/indiehackers. Would love to get your thoughts on our approach?</textarea>
+<div class="absolute top-3 right-3">
+<span class="material-symbols-outlined text-primary/40">edit</span>
+</div>
+</div>
+<div class="mt-3 flex items-center gap-2 px-1">
+<span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>
+<p class="text-[10px] text-slate-500 font-medium uppercase">Personalized by CircleBuilder AI</p>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Action -->
+<footer class="fixed bottom-0 inset-x-0 p-4 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-primary/20 z-30">
+<div class="max-w-md mx-auto flex gap-3">
+<button class="flex-1 bg-primary text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2 active:scale-[0.98] transition-transform">
+<span>Approve + Send</span>
+<span class="material-symbols-outlined">send</span>
+</button>
+<button class="aspect-square bg-slate-200 dark:bg-slate-800 rounded-xl flex items-center justify-center group px-4">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">schedule</span>
+</button>
+</div>
+</footer>
+</body></html>

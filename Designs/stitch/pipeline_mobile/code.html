@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CircleBuilder - Pipeline Kanban</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff4400",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#23140f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab {
+            font-variation-settings: 'FILL' 1;
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">filter_list</span>
+</div>
+<h1 class="text-lg font-bold tracking-tight">CircleBuilder</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">search</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 flex items-center justify-center text-primary text-xs font-bold">
+                CB
+            </div>
+</div>
+</header>
+<!-- Stage Selector (Top Tab Bar) -->
+<div class="sticky top-[60px] z-40 bg-background-light dark:bg-background-dark border-b border-primary/5 overflow-x-auto no-scrollbar">
+<div class="flex px-4 gap-6 min-w-max">
+<button class="relative py-4 text-sm font-bold text-primary border-b-2 border-primary">
+                Discovered
+                <span class="ml-1 text-[10px] bg-primary/20 px-1.5 py-0.5 rounded-full">12</span>
+</button>
+<button class="py-4 text-sm font-medium text-slate-500 dark:text-slate-400">
+                Analyzed
+                <span class="ml-1 text-[10px] bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded-full">8</span>
+</button>
+<button class="py-4 text-sm font-medium text-slate-500 dark:text-slate-400">
+                Engaging
+                <span class="ml-1 text-[10px] bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded-full">5</span>
+</button>
+<button class="py-4 text-sm font-medium text-slate-500 dark:text-slate-400">
+                Negotiating
+                <span class="ml-1 text-[10px] bg-slate-200 dark:bg-slate-800 px-1.5 py-0.5 rounded-full">3</span>
+</button>
+</div>
+</div>
+<!-- Main Content -->
+<main class="flex-1 p-4 pb-24 space-y-4">
+<!-- Recent Runs Panel -->
+<section class="mb-6">
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Recent Runs</h3>
+<button class="text-xs font-semibold text-primary">View All</button>
+</div>
+<div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+<div class="flex-shrink-0 w-40 p-3 rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-xs font-bold truncate">Enterprise Search</p>
+<p class="text-[10px] text-slate-500 mt-1">2 mins ago</p>
+<div class="mt-2 flex items-center gap-1 text-[10px] text-green-500">
+<span class="material-symbols-outlined text-[12px]">check_circle</span>
+                        Completed
+                    </div>
+</div>
+<div class="flex-shrink-0 w-40 p-3 rounded-xl bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-xs font-bold truncate">SaaS Prospecting</p>
+<p class="text-[10px] text-slate-500 mt-1">1 hour ago</p>
+<div class="mt-2 flex items-center gap-1 text-[10px] text-primary">
+<span class="material-symbols-outlined text-[12px] animate-spin">sync</span>
+                        Running...
+                    </div>
+</div>
+</div>
+</section>
+<!-- Lead Cards -->
+<div class="space-y-3">
+<h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 px-1">Discovered Leads</h3>
+<!-- Card 1 -->
+<div class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-xl p-4 flex gap-4 items-center">
+<div class="w-16 h-16 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a business male executive" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiPXAmS11Yb4oJQtP410yM5yuVJKYxBfuwEiknj-r96r24bpNQFqR7fhCRxRPppVh1Acp60gMgSCUCbzn9qigKnOghHE8GrwyaXaZGnM9rYERFt7OU4GiE3abWtd0aCrdBZVy1iYPHK55IRNS5YokRRednem_Q1KUx2oqAVT5alt2mn2Q7zdcYiUc58qaEcsH8QHbYjRUX7YN6jkYYVVUlfTMSgeAkURNlbLFnGy6VrRitcrYeJw2-C5y3vV6yX16ZcQyk3mudo_v_"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-base truncate">John Doe</h4>
+<span class="bg-primary/10 text-primary text-[10px] font-black px-2 py-0.5 rounded-full border border-primary/20">92</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Enterprise • Technology</p>
+<div class="mt-3 flex gap-2">
+<button class="bg-primary text-white text-[10px] font-bold py-1.5 px-3 rounded-lg flex items-center gap-1">
+                            Details <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+<button class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-bold py-1.5 px-2 rounded-lg">
+<span class="material-symbols-outlined text-xs">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-xl p-4 flex gap-4 items-center">
+<div class="w-16 h-16 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close up of a smiling professional woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYVkCMIBYFxxwhjDjA6YPc4cctZjhrdZAlqNL6Cofh42Vqbd0BahMfNnf5Q39n5AaUr3LGCohur3U5O7WYRZmD35KAuQ8KGD1OEPVVcL3PjUpGU9-jwR8Ello7DIQGwI-hPmmByMeIbMvpsgmx98E0q3h_jmZSFKjyi5reLi9MwSiUhqR9NJgdbxbuO-frB8yP6Aq0uJA5bkpqVfdC1ni3iCay6OTFEudKJLaHv8DZRMnh046tZcIJdbJNc45DnWJZKt4YChvLexnj"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-base truncate">Jane Smith</h4>
+<span class="bg-primary/10 text-primary text-[10px] font-black px-2 py-0.5 rounded-full border border-primary/20">85</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">SaaS • Marketing</p>
+<div class="mt-3 flex gap-2">
+<button class="bg-primary text-white text-[10px] font-bold py-1.5 px-3 rounded-lg flex items-center gap-1">
+                            Details <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+<button class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-bold py-1.5 px-2 rounded-lg">
+<span class="material-symbols-outlined text-xs">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-xl p-4 flex gap-4 items-center">
+<div class="w-16 h-16 rounded-lg overflow-hidden bg-slate-100 dark:bg-slate-800 flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young male entrepreneur" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApteXfBD6ajMaCUndybme6tqqAnzl82vx8FDNB4wn451gY1w_sXsBHTM_i8OovC90GqiPU1FDktR6uqorrHMIc7eBM4oY9Sk7CRJgU3Itl76bp-uYGPW1OKkmDRI8jMr7QeLDRA1mio10sJM8TFrFZw-hfB9s-q918EAONBAVAq92k4jtW5EB_OKstnkMd3dAcZklH_EAfiE7uQyLXLXelP8wB-dWNNjWxcaOLmDb1P6i0_FH9y9CEI_X98sdw70QrcdCAKT56R3rP"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-base truncate">Robert Wilson</h4>
+<span class="bg-primary/10 text-primary text-[10px] font-black px-2 py-0.5 rounded-full border border-primary/20">78</span>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">B2B • Logistics</p>
+<div class="mt-3 flex gap-2">
+<button class="bg-primary text-white text-[10px] font-bold py-1.5 px-3 rounded-lg flex items-center gap-1">
+                            Details <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+<button class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-bold py-1.5 px-2 rounded-lg">
+<span class="material-symbols-outlined text-xs">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-lg shadow-primary/40 flex items-center justify-center z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-background-dark/95 backdrop-blur-md border-t border-primary/10 px-6 py-3 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined active-tab">view_kanban</span>
+<span class="text-[10px] font-bold">Pipeline</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-medium">Leads</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-[10px] font-medium">Stats</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CircleBuilder | Lead Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff4400",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#23140f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex h-screen overflow-hidden">
+<!-- Left Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 flex flex-col bg-background-light dark:bg-background-dark">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">adjust</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">CircleBuilder</h1>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">send</span>
+<span class="text-sm font-medium">Campaigns</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="text-sm font-medium">Messages</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 px-2 py-2">
+<div class="size-8 rounded-full bg-slate-300 dark:bg-slate-700 overflow-hidden">
+<img alt="User Profile" data-alt="Abstract circular user avatar icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN73d7rJ_O92Z30shznx2qZc6OxOWnWVLO76xKUR67TAzuLxGbNRTYDeI58kugrWYV4FL3BXmTxq5EZZ7Eoep8WVRfL6ftWlOhRloEF6KxcM9qMd5gjUiZ4IyQyLtaizR_lwQAb4JT9pZ7w1qPypBLth81IgTeFaF9D30jv0CUu_rY3BPhPpwqTOZtH5MB6Zg3mwwPjT3zW4b505bDe4anbUTrhnRLA-wDnQqaKxCLlf7GQtZXcNA_BCbgi9cdGm2KJ1F_HyeB5gbl"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-semibold truncate">Alex Rivera</p>
+<p class="text-[10px] text-slate-500">Pro Plan</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto flex flex-col">
+<!-- Header -->
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-8 py-6">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="size-16 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-primary overflow-hidden">
+<img alt="Reddit User Avatar" data-alt="Stylized avatar of a Reddit user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV0IaHurpY8MZsxid6rRoc9rsyMiQCz2FdIpK_rgdgL0T57ij2h9_U1cYWUrFEqky7EZDImZ30jk5I_hcIcr9snaNYOvEQmOSXGP4oF_LHigzBmB9d5I3ZpJGl3FLj1mUlW7ZL6DGEGcY2OsQkahykKSM2v7xviAley6zJZdrL0Vt2pySwrNBV8OeL2BbgIJZk5RK5u-kU_r1rAQMntWBAD_83lcezmiCWz0Eg8DcSJydl8OPU_wTnFGWxWSxfK4Vag49oQCx-4DEZ"/>
+</div>
+<div>
+<div class="flex items-center gap-3">
+<h2 class="text-2xl font-bold">u/RedditUser123</h2>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/20 text-primary border border-primary/30">Discovered</span>
+</div>
+<div class="flex items-center gap-4 mt-1 text-sm text-slate-500 dark:text-slate-400">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-green-500">verified</span> 92% Match Score</span>
+<span>•</span>
+<span class="flex items-center gap-1 italic">SaaS Founder</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 text-sm font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Archive</button>
+<button class="px-4 py-2 text-sm font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Move to Engaging</button>
+<button class="px-6 py-2 text-sm font-semibold rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">Compose Message</button>
+</div>
+</div>
+</header>
+<!-- Content Grid -->
+<div class="p-8 grid grid-cols-1 xl:grid-cols-3 gap-8">
+<!-- Column 1: Reddit Snapshot & AI Insights -->
+<div class="xl:col-span-2 space-y-8">
+<!-- Profile Snapshot -->
+<section class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+                        Reddit Profile Snapshot
+                    </h3>
+<div class="grid grid-cols-3 gap-4 mb-6">
+<div class="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+<p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Karma</p>
+<p class="text-xl font-bold">12k</p>
+</div>
+<div class="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+<p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Account Age</p>
+<p class="text-xl font-bold">4y</p>
+</div>
+<div class="p-4 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+<p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Active In</p>
+<p class="text-sm font-bold truncate">r/startups, r/saas</p>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-900 rounded-lg p-4 border-l-4 border-primary/50">
+<p class="text-xs text-slate-500 mb-2 font-medium">Original Post Excerpt from r/saas:</p>
+<p class="text-sm italic text-slate-700 dark:text-slate-300 leading-relaxed">
+                            "We just hit $5k MRR with our dev tool but user churn is spiking in the first 7 days. Anyone else dealt with high technical friction during onboarding? Looking for suggestions on how to automate the setup process without losing the personal touch..."
+                        </p>
+</div>
+</section>
+<!-- AI Insights -->
+<section class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-6">
+<h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">psychology</span>
+                        AI Insights
+                    </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="font-medium">Technical Depth</span>
+<span class="text-primary">95%</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full">
+<div class="h-full bg-primary rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="font-medium">Purchasing Intent</span>
+<span class="text-primary">82%</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full">
+<div class="h-full bg-primary rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="font-medium">Directness</span>
+<span class="text-primary">88%</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full">
+<div class="h-full bg-primary rounded-full" style="width: 88%"></div>
+</div>
+</div>
+</div>
+<div>
+<p class="text-xs text-slate-500 uppercase tracking-wider mb-3 font-semibold">Personality Traits &amp; Interests</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">Technical</span>
+<span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium">Direct</span>
+<span class="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-xs font-medium">DevTools</span>
+<span class="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-xs font-medium">Automation</span>
+<span class="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-xs font-medium">B2B SaaS</span>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-primary/5 rounded-lg border border-primary/10">
+<p class="text-xs text-primary font-bold uppercase tracking-widest mb-2">Why this match</p>
+<p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
+                            u/RedditUser123 is actively seeking an automated solution for onboarding friction—a core problem your tool solves. Their background as a SaaS founder and their high technical karma suggests they are a high-value lead who prefers direct, problem-solving communication over marketing fluff.
+                        </p>
+</div>
+</section>
+</div>
+<!-- Column 2: Message Composer -->
+<div class="space-y-8">
+<section class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 p-6 flex flex-col h-full shadow-xl shadow-black/5">
+<h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">smart_toy</span>
+                        AI Message Composer
+                    </h3>
+<!-- Tabs -->
+<div class="flex p-1 bg-slate-100 dark:bg-slate-800 rounded-lg mb-6">
+<button class="flex-1 py-1.5 text-xs font-semibold rounded-md bg-white dark:bg-slate-700 shadow-sm text-primary">Variant A</button>
+<button class="flex-1 py-1.5 text-xs font-semibold rounded-md text-slate-500 hover:text-slate-900 dark:hover:text-slate-200 transition-colors">Variant B</button>
+<button class="flex-1 py-1.5 text-xs font-semibold rounded-md text-slate-500 hover:text-slate-900 dark:hover:text-slate-200 transition-colors">Variant C</button>
+</div>
+<div class="flex-1 flex flex-col gap-4">
+<div class="relative flex-1">
+<textarea class="w-full h-full min-h-[250px] p-4 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg focus:ring-primary focus:border-primary transition-all resize-none" placeholder="Type your message here...">Hi u/RedditUser123, saw your post in r/saas about onboarding friction for your dev tool. Congrats on the $5k MRR! 
+
+We recently built an automation layer that specifically handles technical onboarding for tools like yours without losing that "personal founder touch" you mentioned. Would love to show you how we reduced churn by 14% for a similar project. Interested in a quick peek?</textarea>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
+<p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-1">Rationale for Variant A</p>
+<p class="text-xs text-slate-600 dark:text-slate-400">
+                                Focuses on the "Personal Touch vs Automation" conflict mentioned in their post. Uses "Congrats" as a rapport builder.
+                            </p>
+</div>
+<button class="w-full py-3 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined">auto_awesome</span>
+                            Approve + Send
+                        </button>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+</body></html>

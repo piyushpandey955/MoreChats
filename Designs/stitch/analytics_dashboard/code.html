@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff4400",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#1a0f0b",
+                        "surface-dark": "#2a1a15",
+                        "border-dark": "#3d2821",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-bar {
+            background: linear-gradient(to top, #ff4400 0%, #ff4400 100%);
+        }
+        .chart-bar-dim {
+            background: rgba(255, 68, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 flex-shrink-0 border-r border-border-dark bg-background-dark flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">adjust</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-100 text-base font-bold leading-tight">CircleBuilder</h1>
+<p class="text-slate-400 text-xs font-normal">Growth Engine</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-white bg-primary/10 border border-primary/20 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-primary">bar_chart</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">send</span>
+<span class="text-sm font-medium">Campaigns</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-dark">
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 cursor-pointer transition-colors">
+<div class="size-8 rounded-full bg-slate-700 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of a professional male" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABWDN9aXICvw6wQYHQJQEHae4xhurDJPO6UnWjtIUcpsQmcWQjXv1_emXoXvZxszmn_cwImrVI3w5Rs0HYFmQL-FL9C8o-nILymisZtREeHJcZZvabZJOthOauNI9WUYJioNNVZHUP0qQHkgfRZBSZKc7b1moXP4C18Uc638nalfyCHooD-z9BgxZVFFgdl7GcKfyiyhLdKuS7HiYBGPgiH0t5ACWqRUhzayJQCOwBeBRszcY_G71WNTqi8yYoZn-enT9w1c2gmtRC"/>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-semibold text-slate-100 truncate">Alex Rivera</p>
+<p class="text-[10px] text-slate-500 truncate">Pro Plan</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto bg-background-dark p-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
+<div>
+<h2 class="text-3xl font-black text-slate-100 tracking-tight">Analytics Dashboard</h2>
+<p class="text-slate-400 mt-1">Real-time performance metrics and subreddit insights</p>
+</div>
+<div class="flex bg-surface-dark p-1 rounded-xl border border-border-dark">
+<button class="px-4 py-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors">7d</button>
+<button class="px-4 py-1.5 text-xs font-semibold text-white bg-primary rounded-lg shadow-lg shadow-primary/20">30d</button>
+<button class="px-4 py-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors">90d</button>
+</div>
+</div>
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-surface-dark border border-border-dark p-6 rounded-xl hover:border-primary/50 transition-colors group">
+<div class="flex justify-between items-start mb-4">
+<p class="text-slate-400 text-sm font-medium">Total Leads</p>
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined text-lg">person_add</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-bold text-slate-100">1,284</p>
+<p class="text-emerald-500 text-sm font-semibold">+12.4%</p>
+</div>
+<div class="mt-4 h-1 w-full bg-border-dark rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3"></div>
+</div>
+</div>
+<div class="bg-surface-dark border border-border-dark p-6 rounded-xl hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start mb-4">
+<p class="text-slate-400 text-sm font-medium">Overall Reply Rate</p>
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined text-lg">quickreply</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-bold text-slate-100">24.5%</p>
+<p class="text-emerald-500 text-sm font-semibold">+2.1%</p>
+</div>
+<div class="mt-4 h-1 w-full bg-border-dark rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/4"></div>
+</div>
+</div>
+<div class="bg-surface-dark border border-border-dark p-6 rounded-xl hover:border-primary/50 transition-colors">
+<div class="flex justify-between items-start mb-4">
+<p class="text-slate-400 text-sm font-medium">Reddit Reply Rate</p>
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined text-lg">forum</span>
+</div>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-bold text-slate-100">18.2%</p>
+<p class="text-rose-500 text-sm font-semibold">-0.5%</p>
+</div>
+<div class="mt-4 h-1 w-full bg-border-dark rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[18%]"></div>
+</div>
+</div>
+</div>
+<!-- Insight Callout -->
+<div class="bg-primary/5 border border-primary/20 p-5 rounded-xl flex items-center justify-between mb-8 group hover:bg-primary/10 transition-all">
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<p class="text-white font-bold text-base leading-tight">Performance Insight</p>
+<p class="text-slate-400 text-sm mt-0.5">Best-performing category this month: <span class="text-primary font-medium">B2B SaaS in r/startups</span> (+12% reply rate)</p>
+</div>
+</div>
+<a class="flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+                    View Details
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+<!-- Status Funnel (Bar Chart Representation) -->
+<div class="bg-surface-dark border border-border-dark p-6 rounded-xl">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-slate-100 font-bold">Status Funnel</h3>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer">more_vert</span>
+</div>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-slate-400 uppercase font-bold tracking-wider">Discovered</span>
+<span class="text-slate-100 font-bold">4,120</span>
+</div>
+<div class="h-8 bg-primary/20 rounded border border-primary/10 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary opacity-90 w-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-slate-400 uppercase font-bold tracking-wider">Contacted</span>
+<span class="text-slate-100 font-bold">2,840</span>
+</div>
+<div class="h-8 bg-primary/20 rounded border border-primary/10 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary opacity-90 w-[68%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-slate-400 uppercase font-bold tracking-wider">Replied</span>
+<span class="text-slate-100 font-bold">942</span>
+</div>
+<div class="h-8 bg-primary/20 rounded border border-primary/10 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary opacity-90 w-[22%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-slate-400 uppercase font-bold tracking-wider">Converted</span>
+<span class="text-slate-100 font-bold">312</span>
+</div>
+<div class="h-8 bg-primary/20 rounded border border-primary/10 relative overflow-hidden">
+<div class="absolute inset-0 bg-primary opacity-90 w-[7.5%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Category Distribution (Donut Chart Representation) -->
+<div class="bg-surface-dark border border-border-dark p-6 rounded-xl">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-slate-100 font-bold">Category Distribution</h3>
+<span class="material-symbols-outlined text-slate-500 cursor-pointer">more_vert</span>
+</div>
+<div class="flex items-center justify-around h-48">
+<!-- Custom SVG Donut -->
+<div class="relative w-32 h-32">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle class="text-border-dark stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="12"></circle>
+<circle class="text-primary stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="62.8" stroke-width="12"></circle>
+<circle class="text-primary/40 stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="188.4" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xl font-bold text-slate-100">74%</span>
+<span class="text-[10px] text-slate-400 uppercase">Top Cat</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-full bg-primary"></div>
+<span class="text-sm text-slate-300">B2B SaaS</span>
+<span class="text-sm font-bold text-slate-100 ml-auto">42%</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-full bg-primary/60"></div>
+<span class="text-sm text-slate-300">Consumer Tech</span>
+<span class="text-sm font-bold text-slate-100 ml-auto">28%</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-full bg-primary/20"></div>
+<span class="text-sm text-slate-300">Fintech</span>
+<span class="text-sm font-bold text-slate-100 ml-auto">15%</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="size-3 rounded-full bg-border-dark"></div>
+<span class="text-sm text-slate-300">Other</span>
+<span class="text-sm font-bold text-slate-100 ml-auto">15%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity by Subreddit (Line Chart Area) -->
+<div class="bg-surface-dark border border-border-dark p-6 rounded-xl">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h3 class="text-slate-100 font-bold">Activity by Subreddit</h3>
+<p class="text-xs text-slate-500">Mentions and engagement over time</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-primary"></div>
+<span class="text-xs text-slate-400">r/startups</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-primary/30"></div>
+<span class="text-xs text-slate-400">r/entrepreneur</span>
+</div>
+</div>
+</div>
+<div class="relative h-64 w-full flex items-end justify-between gap-1 group/chart">
+<!-- Fake Line Chart Bars -->
+<div class="h-1/2 w-full bg-primary/20 rounded-t-sm relative group cursor-pointer">
+<div class="absolute bottom-0 w-full bg-primary h-2/3 rounded-t-sm transition-all group-hover:h-3/4"></div>
+</div>
+<div class="h-2/3 w-full bg-primary/20 rounded-t-sm relative group cursor-pointer">
+<div class="absolute bottom-0 w-full bg-primary h-3/4 rounded-t-sm transition-all group-hover:h-5/6"></div>
+</div>
+<div class="h-3/4 w-full bg-primary/20 rounded-t-sm relative group cursor-pointer">
+<div class="absolute bottom-0 w-full bg-primary h-1/2 rounded-t-sm transition-all group-hover:h-2/3"></div>
+</div>
+<div class="h-1/2 w-full bg-primary/20 rounded-t-sm relative group cursor-pointer">
+<div class="absolute bottom-0 w-full bg-primary h-4/5 rounded-t-sm transition-all group-hover:h-[90%]"></div>
+</div>
+<div class="h-5/6 w-full bg-primary/20 rounded-t-sm relative group cursor-pointer">
+<div class="absolute bottom-0 w-full bg-primary h-2/3 rounded-t-sm transition-all group-hover:h-3/4"></div>
+</div>
+<div class="h-full w-full bg-primary/20 rounded-t-sm relative group cursor-pointer">
+<div class="absolute bottom-0 w-full bg-primary h-3/4 rounded-t-sm transition-all group-hover:h-[85%]"></div>
+</div>
+<div class="h-2/3 w-full bg-primary/20 rounded-t-sm relative group cursor-pointer">
+<div class="absolute bottom-0 w-full bg-primary h-1/2 rounded-t-sm transition-all group-hover:h-2/3"></div>
+</div>
+<div class="h-3/4 w-full bg-primary/20 rounded-t-sm relative group cursor-pointer">
+<div class="absolute bottom-0 w-full bg-primary h-5/6 rounded-t-sm transition-all group-hover:h-full"></div>
+</div>
+<div class="h-1/2 w-full bg-primary/20 rounded-t-sm relative group cursor-pointer">
+<div class="absolute bottom-0 w-full bg-primary h-2/3 rounded-t-sm transition-all group-hover:h-3/4"></div>
+</div>
+<div class="h-4/5 w-full bg-primary/20 rounded-t-sm relative group cursor-pointer">
+<div class="absolute bottom-0 w-full bg-primary h-3/4 rounded-t-sm transition-all group-hover:h-[85%]"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] text-slate-500 uppercase tracking-widest font-bold">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+</main>
+</div>
+</body></html>

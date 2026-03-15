@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CircleBuilder Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff4400",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#23140f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="flex min-h-screen">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-primary/10 flex flex-col bg-background-light dark:bg-background-dark/50 sticky top-0 h-screen">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-8">
+<div class="bg-primary rounded-lg p-2">
+<span class="material-symbols-outlined text-white">orbit</span>
+</div>
+<div>
+<h1 class="text-lg font-bold tracking-tight">CircleBuilder</h1>
+<p class="text-xs text-slate-500 dark:text-primary/60 font-medium">v2.4.0-pro</p>
+</div>
+</div>
+<nav class="space-y-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary text-white font-medium transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+                        Account Config
+                    </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+                        Rate Limits
+                    </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="link">link</span>
+                        Connections
+                    </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 dark:hover:bg-primary/20 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+                        Safety Controls
+                    </a>
+</nav>
+</div>
+<div class="mt-auto p-4 border-t border-slate-200 dark:border-primary/10">
+<div class="flex items-center gap-3 px-2">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</div>
+<div class="overflow-hidden">
+<p class="text-sm font-semibold truncate">u/MarketingWizard</p>
+<p class="text-xs text-slate-500 truncate">Premium Plan</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto">
+<div class="max-w-4xl mx-auto p-8 lg:p-12">
+<header class="mb-10">
+<h2 class="text-3xl font-black tracking-tight mb-2">Settings</h2>
+<p class="text-slate-500 dark:text-slate-400">Configure your persona, automation boundaries, and AI integrations.</p>
+</header>
+<div class="space-y-12">
+<!-- Account Config -->
+<section id="account-config">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">person_edit</span>
+<h3 class="text-xl font-bold">Account Configuration</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="md:col-span-2">
+<label class="block text-sm font-semibold mb-2">Persona Editor</label>
+<textarea class="w-full bg-white dark:bg-background-dark border border-slate-200 dark:border-primary/20 rounded-xl p-4 focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-sm leading-relaxed" placeholder="Describe the voice and attitude of your automation persona..." rows="4"></textarea>
+<p class="mt-2 text-xs text-slate-500">This persona guides how the AI interacts with potential leads.</p>
+</div>
+<div>
+<label class="block text-sm font-semibold mb-2">Reddit Handle</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium">u/</span>
+<input class="w-full pl-8 bg-white dark:bg-background-dark border border-slate-200 dark:border-primary/20 rounded-xl h-12 focus:ring-2 focus:ring-primary outline-none" placeholder="username" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-semibold mb-2">Target Age</label>
+<select class="w-full bg-white dark:bg-background-dark border border-slate-200 dark:border-primary/20 rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary outline-none appearance-none">
+<option>18-24</option>
+<option>25-34</option>
+<option>35-44</option>
+<option>45+</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-semibold mb-2">Target Location</label>
+<select class="w-full bg-white dark:bg-background-dark border border-slate-200 dark:border-primary/20 rounded-xl h-12 px-4 focus:ring-2 focus:ring-primary outline-none appearance-none">
+<option>Global</option>
+<option>North America</option>
+<option>Europe</option>
+<option>Asia</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<!-- Rate Limits -->
+<section id="rate-limits">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">speed</span>
+<h3 class="text-xl font-bold">Rate Limits</h3>
+</div>
+<div class="bg-primary/5 border border-primary/10 rounded-2xl p-6">
+<div class="flex justify-between items-center mb-6">
+<label class="text-sm font-semibold">Max Reddit DMs per day</label>
+<span class="bg-primary px-3 py-1 rounded-full text-white text-xs font-bold">42 / 50</span>
+</div>
+<input class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary" max="50" min="0" type="range" value="42"/>
+<div class="flex justify-between mt-2 text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+<span>Conservative</span>
+<span>Aggressive</span>
+</div>
+<p class="mt-4 text-xs text-slate-500 italic flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                                Keeping limits under 50 reduces the risk of account flagging.
+                            </p>
+</div>
+</section>
+<!-- Connection Status -->
+<section id="connections">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">api</span>
+<h3 class="text-xl font-bold">Connection Status</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-white dark:bg-background-dark border border-slate-200 dark:border-primary/20 p-5 rounded-2xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-orange-100 dark:bg-orange-950 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-600">retweet</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">Reddit API</h4>
+<div class="flex items-center gap-1.5 mt-0.5">
+<div class="size-2 rounded-full bg-emerald-500"></div>
+<span class="text-[11px] font-bold text-emerald-500 uppercase">Connected</span>
+</div>
+</div>
+</div>
+<button class="text-xs font-bold text-slate-500 hover:text-primary underline">Reconnect</button>
+</div>
+<div class="bg-white dark:bg-background-dark border border-slate-200 dark:border-primary/20 p-5 rounded-2xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-blue-100 dark:bg-blue-950 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-600">auto_awesome</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">Gemini AI</h4>
+<div class="flex items-center gap-1.5 mt-0.5">
+<div class="size-2 rounded-full bg-emerald-500"></div>
+<span class="text-[11px] font-bold text-emerald-500 uppercase">Active</span>
+</div>
+</div>
+</div>
+<button class="text-xs font-bold text-slate-500 hover:text-primary underline">Settings</button>
+</div>
+</div>
+</section>
+<!-- Safety Controls -->
+<section id="safety">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">security</span>
+<h3 class="text-xl font-bold">Safety Controls</h3>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-white dark:bg-background-dark border border-slate-200 dark:border-primary/20 rounded-xl">
+<div>
+<h4 class="font-bold text-sm">Pause Automation</h4>
+<p class="text-xs text-slate-500">Stop all outbound messages and interactions instantly.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-white dark:bg-background-dark border border-slate-200 dark:border-primary/20 rounded-xl">
+<div>
+<h4 class="font-bold text-sm">Quiet Hours</h4>
+<p class="text-xs text-slate-500">Automatically pause outreach during non-business hours (UTC).</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Action Buttons -->
+<div class="pt-6 border-t border-slate-200 dark:border-primary/10 flex justify-end gap-4">
+<button class="px-6 py-2.5 rounded-xl font-bold text-sm text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Discard Changes</button>
+<button class="px-8 py-2.5 rounded-xl font-bold text-sm text-white bg-primary shadow-lg shadow-primary/20 hover:opacity-90 transition-all">Save Configuration</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

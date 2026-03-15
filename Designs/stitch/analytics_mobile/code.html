@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CircleBuilder Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff4400",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#23140f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab {
+            border-bottom: 3px solid #ff4400;
+            color: #ff4400;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">analytics</span>
+<h1 class="text-xl font-bold tracking-tight">CircleBuilder</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</header>
+<main class="pb-24">
+<!-- Navigation Tabs / Time Selector -->
+<div class="px-4 pt-4">
+<div class="flex items-center justify-between bg-primary/5 p-1 rounded-lg border border-primary/10">
+<button class="flex-1 py-2 text-sm font-semibold rounded-md bg-primary text-white shadow-lg">7d</button>
+<button class="flex-1 py-2 text-sm font-semibold text-slate-500 dark:text-slate-400">30d</button>
+<button class="flex-1 py-2 text-sm font-semibold text-slate-500 dark:text-slate-400">90d</button>
+<button class="flex-1 py-2 text-sm font-semibold text-slate-500 dark:text-slate-400">All</button>
+</div>
+</div>
+<!-- KPI Cards Stacked -->
+<div class="p-4 space-y-4">
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-xl p-5 flex items-center justify-between shadow-sm">
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Total Leads</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold">1,284</span>
+<span class="text-emerald-500 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-xs">arrow_upward</span>12%
+                        </span>
+</div>
+</div>
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">group</span>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-xl p-5 flex items-center justify-between shadow-sm">
+<div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Reply Rate</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-bold">24.5%</span>
+<span class="text-emerald-500 text-sm font-bold flex items-center">
+<span class="material-symbols-outlined text-xs">arrow_upward</span>3.2%
+                        </span>
+</div>
+</div>
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">chat_bubble</span>
+</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="px-4 space-y-6">
+<!-- Status Funnel (Bar Chart) -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold">Status Funnel</h2>
+<span class="material-symbols-outlined text-slate-400">info</span>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-xl p-5 space-y-4">
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
+<span>Discovered</span>
+<span>2,400</span>
+</div>
+<div class="h-3 w-full bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
+<span>Contacted</span>
+<span>1,284</span>
+</div>
+<div class="h-3 w-full bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[54%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
+<span>Replied</span>
+<span>315</span>
+</div>
+<div class="h-3 w-full bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[13%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Distribution (Donut Chart Visual) -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold">Category Distribution</h2>
+<button class="text-primary text-sm font-semibold">View All</button>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-xl p-5">
+<div class="flex items-center gap-8">
+<div class="relative w-32 h-32 shrink-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<circle class="stroke-primary/10" cx="18" cy="18" fill="none" r="16" stroke-width="4"></circle>
+<circle class="stroke-primary" cx="18" cy="18" fill="none" r="16" stroke-dasharray="65, 100" stroke-width="4"></circle>
+<circle class="stroke-orange-300" cx="18" cy="18" fill="none" r="16" stroke-dasharray="20, 100" stroke-dashoffset="-65" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xl font-bold">85%</span>
+<span class="text-[10px] text-slate-500 uppercase">Tech</span>
+</div>
+</div>
+<div class="flex-1 space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-sm font-medium">Software</span>
+<span class="ml-auto text-sm text-slate-500">65%</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-orange-300"></div>
+<span class="text-sm font-medium">AI Tools</span>
+<span class="ml-auto text-sm text-slate-500">20%</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary/20"></div>
+<span class="text-sm font-medium">Other</span>
+<span class="ml-auto text-sm text-slate-500">15%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Activity by Subreddit (Bar Chart) -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold">Activity by Subreddit</h2>
+<span class="material-symbols-outlined text-slate-400">sort</span>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-xl p-5 space-y-6">
+<div class="flex items-end justify-between h-32 px-2">
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-8 bg-primary rounded-t-sm" style="height: 80%;"></div>
+<span class="text-[10px] text-slate-500">r/SaaS</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-8 bg-primary/60 rounded-t-sm" style="height: 60%;"></div>
+<span class="text-[10px] text-slate-500">r/indie</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-8 bg-primary/40 rounded-t-sm" style="height: 95%;"></div>
+<span class="text-[10px] text-slate-500">r/tech</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-8 bg-primary/20 rounded-t-sm" style="height: 45%;"></div>
+<span class="text-[10px] text-slate-500">r/start</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full">
+<div class="w-8 bg-primary/80 rounded-t-sm" style="height: 70%;"></div>
+<span class="text-[10px] text-slate-500">r/dev</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-background-light dark:bg-background-dark border-t border-primary/10 px-6 py-2 pb-6 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined font-variation-fill">bar_chart</span>
+<span class="text-[10px] font-bold">Dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-medium">Leads</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="text-[10px] font-medium">Inbox</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</a>
+</nav>
+</body></html>

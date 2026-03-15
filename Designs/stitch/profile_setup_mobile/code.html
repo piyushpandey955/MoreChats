@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile Setup - CircleBuilder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff4400",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#180d0a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<div class="flex items-center p-4 justify-between max-w-md mx-auto">
+<div class="flex items-center gap-3">
+<button class="p-2 -ml-2 hover:bg-primary/10 rounded-full transition-colors">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="text-xl font-bold tracking-tight">Profile Setup</h1>
+</div>
+<button class="text-primary font-semibold text-sm">Save Exit</button>
+</div>
+</header>
+<main class="max-w-md mx-auto pb-24">
+<!-- Progress Section -->
+<section class="p-6 flex flex-col items-center">
+<div class="relative flex items-center justify-center">
+<svg class="w-32 h-32">
+<circle class="text-primary/10" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="127.5" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-black text-primary">65%</span>
+</div>
+</div>
+<div class="text-center mt-4">
+<h2 class="text-lg font-bold">Reddit Readiness</h2>
+<p class="text-slate-500 dark:text-primary/60 text-sm">Almost ready to engage authentically</p>
+</div>
+</section>
+<!-- Persona Summary Card -->
+<section class="px-4 mb-8">
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl overflow-hidden border border-primary/20">
+<div class="h-32 bg-cover bg-center" data-alt="Abstract orange and dark geometric pattern" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAePnR5IzDyT1Zi1n4icnxKUwpiWy5o28uVa1RLv64KqeIT98qGdC2RIK5rqmKc4HcXITu8zgbyQZ6Em-DjCpdnM8kckcqm3eRf2e_FP7Kyh8zPZG8Or1mHblNU2gRTkcLPe4OBAZRojybuldYjzqk-P8HZUHg2Oay6f3GTbOmPAo9VLgdb8lE8Sf0DIxleJhpYuU_S-N_OT-D5fahFwuD-V--2ts_Yk-bNQzxQTeNPfFN_czG88slwTG-lYc2MixH9iEpVH_3tXZxN');"></div>
+<div class="p-5">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-sm">psychology</span>
+<h3 class="font-bold uppercase tracking-wider text-xs text-primary">Current Persona</h3>
+</div>
+<h4 class="text-lg font-bold mb-2">The Tech Architect</h4>
+<p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                        Tech-savvy early adopter interested in AI and decentralized finance. Known for helpful, concise comments that bridge complex tech with practical usage.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Bio Option Generator -->
+<section class="px-4 mb-8">
+<div class="flex items-center justify-between mb-4 px-1">
+<h3 class="text-lg font-bold">Bio Suggestions</h3>
+<button class="flex items-center gap-1 text-primary text-sm font-medium">
+<span class="material-symbols-outlined text-sm">refresh</span>
+                    Regenerate
+                </button>
+</div>
+<div class="space-y-3">
+<!-- Bio Option 1 -->
+<div class="bg-white dark:bg-white/5 p-4 rounded-xl border border-slate-200 dark:border-primary/10 flex flex-col gap-3">
+<p class="text-sm text-slate-700 dark:text-slate-200 leading-snug">
+                        "Building tools for creators. AI enthusiast and community manager at CircleBuilder. Love discussing the future of LLMs."
+                    </p>
+<button class="w-full bg-primary text-white font-bold py-2 rounded-lg text-sm hover:opacity-90 transition-opacity">
+                        Use this
+                    </button>
+</div>
+<!-- Bio Option 2 -->
+<div class="bg-white dark:bg-white/5 p-4 rounded-xl border border-slate-200 dark:border-primary/10 flex flex-col gap-3">
+<p class="text-sm text-slate-700 dark:text-slate-200 leading-snug">
+                        "Software Engineer by day, prompt engineer by night. Deep into automation and building sustainable digital communities."
+                    </p>
+<button class="w-full bg-primary/10 text-primary font-bold py-2 rounded-lg text-sm hover:bg-primary/20 transition-colors">
+                        Use this
+                    </button>
+</div>
+</div>
+</section>
+<!-- Target Subreddits -->
+<section class="px-4 mb-8">
+<div class="flex items-center justify-between mb-4 px-1">
+<h3 class="text-lg font-bold">Target Subreddits</h3>
+<span class="text-xs font-medium text-slate-400 bg-slate-100 dark:bg-primary/10 px-2 py-0.5 rounded">4 Selected</span>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<div class="flex items-center gap-1.5 bg-primary/10 text-primary border border-primary/20 px-3 py-1.5 rounded-full text-sm font-medium">
+                    r/artificial
+                    <span class="material-symbols-outlined text-xs cursor-pointer">close</span>
+</div>
+<div class="flex items-center gap-1.5 bg-primary/10 text-primary border border-primary/20 px-3 py-1.5 rounded-full text-sm font-medium">
+                    r/saas
+                    <span class="material-symbols-outlined text-xs cursor-pointer">close</span>
+</div>
+<div class="flex items-center gap-1.5 bg-primary/10 text-primary border border-primary/20 px-3 py-1.5 rounded-full text-sm font-medium">
+                    r/webdev
+                    <span class="material-symbols-outlined text-xs cursor-pointer">close</span>
+</div>
+<div class="flex items-center gap-1.5 bg-primary/10 text-primary border border-primary/20 px-3 py-1.5 rounded-full text-sm font-medium">
+                    r/startups
+                    <span class="material-symbols-outlined text-xs cursor-pointer">close</span>
+</div>
+<button class="flex items-center gap-1.5 bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 px-3 py-1.5 rounded-full text-sm font-medium border border-dashed border-slate-300 dark:border-primary/20">
+<span class="material-symbols-outlined text-sm">add</span>
+                    Add
+                </button>
+</div>
+</section>
+<!-- Footer Actions (Sticky Bottom) -->
+<div class="fixed bottom-0 left-0 right-0 p-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-lg border-t border-primary/10">
+<div class="max-w-md mx-auto flex gap-3">
+<button class="flex-1 bg-slate-200 dark:bg-white/10 text-slate-900 dark:text-white font-bold py-4 rounded-xl hover:opacity-90 transition-opacity">
+                    Previous
+                </button>
+<button class="flex-[2] bg-primary text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/25 hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+                    Complete Profile
+                    <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+</body></html>

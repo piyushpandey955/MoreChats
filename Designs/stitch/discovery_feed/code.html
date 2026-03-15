@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CircleBuilder Discovery Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff4400",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#23140f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 flex flex-col border-r border-slate-200 dark:border-primary/20 bg-background-light dark:bg-background-dark">
+<div class="p-6">
+<div class="flex items-center gap-2 mb-8">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">circle_notifications</span>
+</div>
+<div>
+<h1 class="text-lg font-bold leading-none">CircleBuilder</h1>
+<p class="text-xs text-slate-500 dark:text-primary/60 font-medium">Lead Gen Suite</p>
+</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary border border-primary/20" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-medium">Discovery</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">view_kanban</span>
+<span class="font-medium">Pipeline</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">person_search</span>
+<span class="font-medium">Lead Details</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">leaderboard</span>
+<span class="font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">person_add</span>
+<span class="font-medium">Profile Setup</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-slate-200 dark:border-primary/10">
+<div class="flex items-center gap-3 px-2">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold truncate">Alex Growth</p>
+<p class="text-xs text-slate-500 dark:text-primary/60 truncate">Pro Plan</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<header class="h-16 border-b border-slate-200 dark:border-primary/20 bg-white/50 dark:bg-background-dark/50 backdrop-blur-md flex items-center justify-between px-8">
+<div class="flex-1 max-w-md">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-primary/40 text-lg">search</span>
+<input class="w-full bg-slate-100 dark:bg-primary/5 border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 text-slate-900 dark:text-slate-100" placeholder="Search leads, subreddits, or keywords..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">radar</span>
+                        Run Reddit Scan
+                    </button>
+<button class="bg-slate-200 dark:bg-primary/10 hover:bg-slate-300 dark:hover:bg-primary/20 text-slate-900 dark:text-white px-5 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition-all border border-transparent dark:border-primary/20">
+<span class="material-symbols-outlined text-lg">chat_bubble</span>
+                        Check Replies
+                    </button>
+<div class="h-8 w-px bg-slate-200 dark:bg-primary/20 mx-2"></div>
+<button class="size-10 rounded-xl flex items-center justify-center hover:bg-slate-100 dark:hover:bg-primary/10 relative text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full border-2 border-white dark:border-background-dark"></span>
+</button>
+<button class="size-10 rounded-xl flex items-center justify-center hover:bg-slate-100 dark:hover:bg-primary/10 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8 space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-primary/5 p-6 rounded-xl border border-slate-200 dark:border-primary/10 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Total Leads</p>
+<span class="text-green-500 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span>+12%
+                            </span>
+</div>
+<h3 class="text-3xl font-bold">1,240</h3>
+</div>
+<div class="bg-white dark:bg-primary/5 p-6 rounded-xl border border-slate-200 dark:border-primary/10 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Reply Rate</p>
+<span class="text-green-500 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span>+2.4%
+                            </span>
+</div>
+<h3 class="text-3xl font-bold">18.5%</h3>
+</div>
+<div class="bg-white dark:bg-primary/5 p-6 rounded-xl border border-slate-200 dark:border-primary/10 shadow-sm">
+<div class="flex items-center justify-between mb-2">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Leads this week</p>
+<span class="text-green-500 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span>+15%
+                            </span>
+</div>
+<h3 class="text-3xl font-bold">142</h3>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between flex-wrap gap-4">
+<div class="flex items-center gap-3 overflow-x-auto pb-1">
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-primary/10 rounded-xl text-sm font-medium border border-transparent dark:border-primary/20">
+                                Category <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-primary/10 rounded-xl text-sm font-medium border border-transparent dark:border-primary/20">
+                                Status <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-primary/10 rounded-xl text-sm font-medium border border-transparent dark:border-primary/20">
+                                Score Range <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-primary/10 rounded-xl text-sm font-medium border border-transparent dark:border-primary/20">
+                                Subreddit <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="bg-slate-200 dark:bg-primary/10 p-1 rounded-xl flex items-center border border-transparent dark:border-primary/20">
+<button class="px-4 py-1.5 rounded-lg text-xs font-bold bg-white dark:bg-background-dark shadow-sm">Newest</button>
+<button class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400">Match</button>
+<button class="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-400">Approachability</button>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 rounded-xl border border-slate-200 dark:border-primary/10 overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-primary/5 border-b border-slate-200 dark:border-primary/10">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60">Username</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60">Subreddit</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60 text-center">Match Score</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60">Category</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60 text-right">Quick Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-primary/10">
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-primary/20 flex items-center justify-center font-bold text-primary">u/</div>
+<span class="font-medium text-sm">pixel_architect</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">r/SaaS</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<div class="px-3 py-1 rounded-full bg-green-500/10 text-green-500 text-xs font-bold border border-green-500/20">
+                                                98% Match
+                                            </div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-slate-200 dark:bg-primary/20 text-xs font-medium">Design Tools</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-primary transition-colors" title="View Details">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-primary transition-colors" title="Move Stage">
+<span class="material-symbols-outlined text-lg">move_item</span>
+</button>
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-primary transition-colors" title="Craft Message">
+<span class="material-symbols-outlined text-lg">auto_fix</span>
+</button>
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-red-500 transition-colors" title="Archive">
+<span class="material-symbols-outlined text-lg">archive</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-primary/20 flex items-center justify-center font-bold text-primary">u/</div>
+<span class="font-medium text-sm">indie_coder_99</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">r/SideProject</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<div class="px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-600 text-xs font-bold border border-yellow-500/20">
+                                                84% Match
+                                            </div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-slate-200 dark:bg-primary/20 text-xs font-medium">Developer Tools</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">move_item</span></button>
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">auto_fix</span></button>
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-lg">archive</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-primary/20 flex items-center justify-center font-bold text-primary">u/</div>
+<span class="font-medium text-sm">marketing_ninja</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">r/growthhacking</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<div class="px-3 py-1 rounded-full bg-green-500/10 text-green-500 text-xs font-bold border border-green-500/20">
+                                                91% Match
+                                            </div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-slate-200 dark:bg-primary/20 text-xs font-medium">Marketing SaaS</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">move_item</span></button>
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">auto_fix</span></button>
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-lg">archive</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-primary/20 flex items-center justify-center font-bold text-primary">u/</div>
+<span class="font-medium text-sm">solofounder_life</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">r/entrepeneur</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex justify-center">
+<div class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-500 text-xs font-bold border border-blue-500/20">
+                                                76% Match
+                                            </div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-slate-200 dark:bg-primary/20 text-xs font-medium">Business Advice</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">visibility</span></button>
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">move_item</span></button>
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-primary transition-colors"><span class="material-symbols-outlined text-lg">auto_fix</span></button>
+<button class="p-2 hover:bg-white dark:hover:bg-primary/20 rounded-lg text-slate-400 dark:text-primary/60 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-lg">archive</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-6 py-4 bg-slate-50 dark:bg-primary/5 flex items-center justify-between border-t border-slate-200 dark:border-primary/10">
+<p class="text-sm text-slate-500 dark:text-slate-400">Showing 1-4 of 1,240 leads</p>
+<div class="flex items-center gap-2">
+<button class="size-8 rounded flex items-center justify-center border border-slate-200 dark:border-primary/20 text-slate-400 cursor-not-allowed"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="size-8 rounded flex items-center justify-center bg-primary text-white font-bold text-sm">1</button>
+<button class="size-8 rounded flex items-center justify-center border border-slate-200 dark:border-primary/20 hover:bg-slate-100 dark:hover:bg-primary/10 text-sm">2</button>
+<button class="size-8 rounded flex items-center justify-center border border-slate-200 dark:border-primary/20 hover:bg-slate-100 dark:hover:bg-primary/10 text-sm">3</button>
+<button class="size-8 rounded flex items-center justify-center border border-slate-200 dark:border-primary/20 hover:bg-slate-100 dark:hover:bg-primary/10"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

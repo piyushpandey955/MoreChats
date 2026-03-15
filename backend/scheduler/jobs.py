@@ -187,12 +187,7 @@ def _save_reply(db, username: str, platform: Platform, text: str, leads: list):
     db.add(reply)
     lead.status = LeadStatus.REPLIED
 
-    # Send Discord notification
-    try:
-        from backend.notifications.discord import send_reply_notification
-        send_reply_notification(lead, text)
-    except Exception as e:
-        logger.error(f"Failed to send Discord notification: {e}")
+    # Notifications are handled in-app
 
 
 def stop_scheduler():

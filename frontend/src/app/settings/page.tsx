@@ -18,7 +18,8 @@ export default function SettingsPage() {
         setConfig(configData);
         setRateLimits(limitsData);
       } catch (err) {
-        console.error("Failed to fetch settings:", err);
+        const message = err instanceof Error ? err.message : "Unknown error";
+        console.warn(`Failed to fetch settings: ${message}`);
       } finally {
         setLoading(false);
       }

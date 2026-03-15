@@ -1,5 +1,5 @@
 """
-CircleBuilder Configuration
+MoreChats Configuration
 Central config loaded from environment variables / .env file.
 """
 
@@ -10,18 +10,18 @@ class Settings(BaseSettings):
     """Application settings loaded from environment variables."""
 
     # --- App ---
-    app_name: str = "CircleBuilder"
+    app_name: str = "MoreChats"
     debug: bool = False
 
     # --- Database ---
-    database_url: str = "sqlite:///./circlebuilder.db"
+    database_url: str = "sqlite:///./morechats.db"
 
     # --- Reddit ---
     reddit_client_id: str = ""
     reddit_client_secret: str = ""
     reddit_username: str = ""
     reddit_password: str = ""
-    reddit_user_agent: str = "CircleBuilder/1.0 by I_exist"
+    reddit_user_agent: str = "MoreChats/1.0 by I_exist"
     reddit_max_dms_per_day: int = 30
 
     # Subreddits to monitor
@@ -30,10 +30,6 @@ class Settings(BaseSettings):
     # --- Google Gemini ---
     gemini_api_key: str = ""
     gemini_model: str = "gemini-2.0-flash"
-
-    # --- Discord ---
-    discord_webhook_url: str = ""
-    discord_bot_token: str = ""
 
     # --- Persona ---
     persona_name: str = "Divit"

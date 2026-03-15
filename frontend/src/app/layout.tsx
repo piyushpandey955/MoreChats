@@ -7,7 +7,7 @@ import AppMobileNav from "@/components/AppMobileNav";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CircleBuilder",
+  title: "MoreChats",
   description: "Reddit outreach automation",
 };
 

@@ -21,7 +21,8 @@ export default function ProfileSetupPage() {
         setRedditChecklist(rdList);
         setRedditBioOptions(personaData?.platforms?.reddit?.bio_options ?? []);
       } catch (err) {
-        console.error("Failed to fetch profile data:", err);
+        const message = err instanceof Error ? err.message : "Unknown error";
+        console.warn(`Failed to fetch profile data: ${message}`);
       } finally {
         setLoading(false);
       }
@@ -41,7 +42,8 @@ export default function ProfileSetupPage() {
         if (texts.length > 0) setRedditBioOptions(texts);
       }
     } catch (err) {
-      console.error("Failed to generate bios:", err);
+      const message = err instanceof Error ? err.message : "Unknown error";
+      console.warn(`Failed to generate bios: ${message}`);
     } finally {
       setGeneratingBios(false);
     }

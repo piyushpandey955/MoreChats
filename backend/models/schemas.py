@@ -1,5 +1,5 @@
 """
-Database models (SQLAlchemy) and Pydantic schemas for CircleBuilder.
+Database models (SQLAlchemy) and Pydantic schemas for MoreChats.
 Unified leads model for Reddit pipeline.
 """
 

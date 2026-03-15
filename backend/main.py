@@ -1,5 +1,5 @@
 """
-CircleBuilder -- Main FastAPI Application
+MoreChats -- Main FastAPI Application
 Reddit outreach automation with AI-powered messaging.
 """
 
@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application startup and shutdown lifecycle."""
-    logger.info("Starting CircleBuilder...")
+    logger.info("Starting MoreChats...")
 
     # Initialize database
     init_db()
@@ -50,11 +50,11 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning(f"Scheduler failed to start: {e}")
 
-    logger.info("CircleBuilder is running!")
+    logger.info("MoreChats is running!")
     yield
 
     # Shutdown
-    logger.info("Shutting down CircleBuilder...")
+    logger.info("Shutting down MoreChats...")
     try:
         from backend.scheduler.jobs import stop_scheduler
         stop_scheduler()
@@ -64,7 +64,7 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI app
 app = FastAPI(
-    title="CircleBuilder",
+    title="MoreChats",
     description="Reddit outreach automation with AI-powered messaging",
     version="1.0.0",
     lifespan=lifespan,
@@ -89,7 +89,7 @@ app.include_router(settings_api.router)
 @app.get("/")
 def root():
     return {
-        "app": "CircleBuilder",
+        "app": "MoreChats",
         "version": "1.0.0",
         "persona": settings.persona_name,
         "platforms": {

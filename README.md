@@ -1,4 +1,4 @@
-# CircleBuilder
+# MoreChats
 
 Hybrid-automated Reddit outreach system with AI-powered messaging and a web dashboard. Discovers, analyzes, and crafts personalized messages for leads across 6 interaction categories.
 

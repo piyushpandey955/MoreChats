@@ -95,7 +95,8 @@ export default function PipelineKanbanPage() {
         setKanban(kanbanData);
         setRuns(runsData);
       } catch (err) {
-        console.error("Failed to fetch pipeline data:", err);
+        const message = err instanceof Error ? err.message : "Unknown error";
+        console.warn(`Failed to fetch pipeline data: ${message}`);
       } finally {
         setLoading(false);
       }
@@ -123,14 +124,14 @@ export default function PipelineKanbanPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500/10 text-orange-500">
               <Filter className="h-5 w-5" />
             </div>
-            <h1 className="text-lg font-bold tracking-tight text-white">CircleBuilder</h1>
+            <h1 className="text-lg font-bold tracking-tight text-white">MoreChats</h1>
           </div>
           <div className="flex items-center gap-2">
             <button className="p-2 text-slate-400">
               <Search className="h-5 w-5" />
             </button>
             <div className="flex h-8 w-8 items-center justify-center rounded-full border border-orange-500/30 bg-orange-500/20 text-xs font-bold text-orange-500">
-              CB
+              MC
             </div>
           </div>
         </header>

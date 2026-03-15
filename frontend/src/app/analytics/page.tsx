@@ -25,7 +25,8 @@ export default function AnalyticsPage() {
       try {
         setStats(await api.getStats());
       } catch (err) {
-        console.error("Failed to fetch stats:", err);
+        const message = err instanceof Error ? err.message : "Unknown error";
+        console.warn(`Failed to fetch stats: ${message}`);
         setStats(null);
       } finally {
         setLoading(false);

@@ -44,7 +44,8 @@ export default function DiscoveryFeed() {
       setLeads(leadsData);
       setStats(statsData);
     } catch (err) {
-      console.error("Failed to fetch leads/stats:", err);
+      const message = err instanceof Error ? err.message : "Unknown error";
+      console.warn(`Failed to fetch leads/stats: ${message}`);
       setLeads([]);
       setStats(null);
     } finally {
@@ -62,7 +63,8 @@ export default function DiscoveryFeed() {
       await fn();
       await fetchData();
     } catch (err) {
-      console.error("Action failed:", err);
+      const message = err instanceof Error ? err.message : "Unknown error";
+      console.warn(`Action failed: ${message}`);
     } finally {
       setActionLoading(null);
     }
